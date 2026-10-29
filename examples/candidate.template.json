@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0.0",
+  "candidate_id": "TOPIC-TEST-0001",
+  "candidate_version": 1,
+  "environment": "test",
+  "is_fixture": true,
+  "state": "evidence_pending",
+  "snapshot_refs": [
+    {
+      "snapshot_id": "SNAP-TEST-0001",
+      "record_id": "HOT-TEST-0001"
+    }
+  ],
+  "modern_context_status": "unverified",
+  "entities": [
+    {
+      "entity_id": "ENTITY-TEST-0001",
+      "mention": "某地古城",
+      "entity_type": "place",
+      "resolution": "ambiguous",
+      "selected_identity": null,
+      "alternatives": [],
+      "support_evidence_ids": []
+    }
+  ],
+  "relation_type": "weak",
+  "bridge_claim": "待查：能否从地名沿革找到有依据的历史故事。",
+  "bridge_claim_id": null,
+  "story_question": "待确定",
+  "proposed_title": "待证据审核后生成",
+  "opening_idea": "",
+  "claims": [],
+  "evidence": [],
+  "evidence_links": [],
+  "estimated_minutes": null,
+  "duration_basis": null,
+  "timeliness": {
+    "reviewed_at": null,
+    "expected_window_end": null,
+    "expected_finish_at": null,
+    "is_estimate": true,
+    "reason": "构造样例，不作时效判断。"
+  },
+  "editorial_score": null,
+  "score_is_probability": false,
+  "review": {
+    "status": "not_started",
+    "reviewer_id": null,
+    "reviewed_candidate_version": null,
+    "reviewed_input_hash": null,
+    "reviewed_at": null,
+    "open_fact_blockers": null,
+    "independence_record": null
+  },
+  "issues": [],
+  "export": {
+    "eligible": false,
+    "target_workflow": null,
+    "receipt_id": null,
+    "episode_id": null,
+    "exported_at": null
+  }
+}

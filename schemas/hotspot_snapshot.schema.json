@@ -1,0 +1,475 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "snapshot_id": {
+      "type": "string"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "source_id": {
+      "type": "string"
+    },
+    "upstream_family_id": {
+      "type": "string"
+    },
+    "board_type": {
+      "enum": [
+        "hot_words",
+        "rising_words",
+        "hot_videos",
+        "manual",
+        "unknown"
+      ]
+    },
+    "capture_kind": {
+      "enum": [
+        "live",
+        "manual",
+        "replay"
+      ]
+    },
+    "environment": {
+      "enum": [
+        "test",
+        "production"
+      ]
+    },
+    "is_fixture": {
+      "type": "boolean"
+    },
+    "fetched_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "source_updated_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "provider_fetched_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "window_start": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "window_end": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "cache_status": {
+      "enum": [
+        "fresh_fetch",
+        "cached",
+        "unknown"
+      ]
+    },
+    "source_freshness": {
+      "enum": [
+        "within_budget",
+        "stale",
+        "unknown"
+      ]
+    },
+    "status": {
+      "enum": [
+        "valid",
+        "empty_valid",
+        "partial",
+        "stale",
+        "unavailable",
+        "blocked",
+        "schema_changed"
+      ]
+    },
+    "quality_gate": {
+      "enum": [
+        "usable",
+        "needs_review",
+        "quarantined"
+      ]
+    },
+    "business_error_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "parser_version": {
+      "type": "string"
+    },
+    "raw": {
+      "anyOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "relative_path": {
+              "type": "string"
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "secrets_removed": {
+              "const": true
+            },
+            "redaction_note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "relative_path",
+            "sha256",
+            "secrets_removed",
+            "redaction_note"
+          ]
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "raw_absence_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "returned_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "source_total": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "truncated": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "scope": {
+          "type": "string"
+        },
+        "pagination_complete": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "returned_count",
+        "source_total",
+        "truncated",
+        "scope",
+        "pagination_complete"
+      ]
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "record_id": {
+            "type": "string"
+          },
+          "source_item_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "title_raw": {
+            "type": "string",
+            "minLength": 1
+          },
+          "title_normalized": {
+            "type": "string"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "rank": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1
+              },
+              "basis": {
+                "enum": [
+                  "provided",
+                  "list_position",
+                  "none"
+                ]
+              },
+              "raw": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            },
+            "required": [
+              "value",
+              "basis",
+              "raw"
+            ]
+          },
+          "heat": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "raw_value": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "normalized_decimal": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "pattern": "^[0-9]+(?:\\.[0-9]+)?$"
+              },
+              "metric_name": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "unit": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "approximate": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "raw_value",
+              "normalized_decimal",
+              "metric_name",
+              "unit",
+              "approximate"
+            ]
+          },
+          "category_raw": {
+            "type": [
+              "string",
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "event_time_raw": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "event_time_semantics": {
+            "enum": [
+              "confirmed",
+              "unknown",
+              "not_provided"
+            ]
+          },
+          "field_mappings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "field": {
+                  "type": "string"
+                },
+                "locator_kind": {
+                  "enum": [
+                    "json_pointer",
+                    "dom_locator",
+                    "manual_line"
+                  ]
+                },
+                "locator": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "field",
+                "locator_kind",
+                "locator"
+              ]
+            }
+          },
+          "cluster_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "record_id",
+          "source_item_id",
+          "title_raw",
+          "title_normalized",
+          "url",
+          "rank",
+          "heat",
+          "category_raw",
+          "event_time_raw",
+          "event_time_semantics",
+          "field_mappings",
+          "cluster_id"
+        ]
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "snapshot_id",
+    "run_id",
+    "source_id",
+    "upstream_family_id",
+    "board_type",
+    "capture_kind",
+    "environment",
+    "is_fixture",
+    "fetched_at",
+    "source_updated_at",
+    "provider_fetched_at",
+    "window_start",
+    "window_end",
+    "cache_status",
+    "source_freshness",
+    "status",
+    "quality_gate",
+    "business_error_code",
+    "parser_version",
+    "raw",
+    "raw_absence_reason",
+    "coverage",
+    "records",
+    "warnings"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Hotspot snapshot V1",
+  "description": "Structure only. Business validation, provenance and raw-file checks remain mandatory.",
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "is_fixture": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "environment": {
+            "const": "test"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "unavailable",
+              "blocked",
+              "schema_changed"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "quality_gate": {
+            "const": "quarantined"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "raw": {
+            "type": "null"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "raw_absence_reason": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "unavailable",
+              "blocked",
+              "schema_changed"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "raw_absence_reason": {
+            "const": null
+          }
+        }
+      }
+    }
+  ]
+}
